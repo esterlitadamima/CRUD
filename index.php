@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>WEB</title>
+    <title>Dialog</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
 
-<h1 class="text-center">Tugas Web CRUD</h1>
-<h2 class="text-center">@damimaesterlita</h2>
+<h1 class="text-center">Produk</h1>
+<h2 class="text-center">@Dialog</h2>
 
 <!-- Awal Card Form -->
 <div class="card mt-4">
     <div class="card-header bg-primary text-white">
-        Form input data barang
+        Form input data Produk
 </div>
 <div class="card-body">
     <form method="post" action="">
@@ -23,13 +23,7 @@
         </div>
         <div class="form-group">
             <label>Kode Produk</label>
-            <select class="form-control" name="tkode">
-                <option></option>
-                <option value="123-Susu Dancow">123-Susu Dancow</option>
-                <option value="231-Susu SGM">231-Susu SGM</option>
-                <option value="342-cococrunch">342-cococrunch</option>
-                <option value="453-Milo">453-Milo</option>
-</select>
+            <input type="text" name="Kode Produk" class="form-control" placeholder="input kode produk" required>
         </div>
         <div class="form-group">
             <label>Nama Produk</label>
@@ -48,16 +42,16 @@
             <input type="text" name="Stok" class="form-control" placeholder="Input stok" required>
         </div>
         <div class="form-group">
-            <label>Satuan Barang</label>
-            <input type="text" name="Satuan Barang" class="form-control" placeholder="Input satuan barang" required>
+            <label>Satuan Produk</label>
+            <input type="text" name="Satuan Produk" class="form-control" placeholder="Input satuan produk" required>
         </div>
         <div class="form-group">
             <label>Tanggal Kadaluarsa</label>
             <input type="text" name="Tanggal Kadaluarsa" class="form-control" placeholder="Input tanggal kadaluarsa" required>
         </div>
         <div class="form-group">
-            <label>Jumlah Tersedia Barang</label>
-            <input type="text" name="Jumlah Tersedia Barang" class="form-control" placeholder="Input jumlah tersedia barang" required>
+            <label>Jumlah Produk</label>
+            <input type="text" name="Jumlah Produk" class="form-control" placeholder="Input jumlah produk" required>
         </div>
         <div class="form-group">
             <label>Harga</label>
@@ -72,12 +66,53 @@
             <input type="text" name="karyawan" class="form-control" placeholder="Input karyawan" required>
         </div>
 
+        <button type="submit" class="btn btn-success" name="bsimpan">simpan</button>
+        <button type="reset" class="btn btn-danger" name="breset">kosongkan</button>
+
     </form>
 
 </div>
 </div>
 <!-- Akhir Card Form -->
 
+<!-- Awal Card Tabel -->
+<div class="card mt-4">
+    <div class="card-header bg-success text-white">
+        Daftar Produk
+</div>
+<div class="card-body">
+  <table class="table table-bordered">
+  <tr>
+      <th>No</th>
+      <th>Kode Produk</th>
+      <th>Nama Produk</th>
+      <th>Deskripsi Produk</th>
+      <th>Merek</th>
+      <th>Stok</th>
+      <th>Satuan produk</th>
+      <th>Tanggal Kadaluarsa</th>
+      <th>Jumlah produk</th>
+      <th>Harga</th>
+      <th>Supplier</Th>
+      <th>Karyawan</th>
+</tr>
+<tr>
+    <td>1</td>
+    <td>123</td>
+    <td>Minyak</td>
+    <td>Baik digunakan</td>
+    <td>Bimoli</td>
+    <td>30</td>
+    <td>12</td>
+    <td>12 oktober 2023</td>
+    <td>50</td>
+    <td>12.000</td>
+    <td>Megaria</td>
+    <td>Ester</td>
+</table>
+</div>
+</div>
+<!-- Akhir Card Tabel-->
 </div>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 </body>
