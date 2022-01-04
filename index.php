@@ -81,7 +81,7 @@
         Daftar Produk
 </div>
 <div class="card-body">
-  <table class="table table-bordered">
+  <table class="table table-bordered table-striped">
   <tr>
       <th>No</th>
       <th>Kode Produk</th>
@@ -95,20 +95,25 @@
       <th>Harga</th>
       <th>Supplier</Th>
       <th>Karyawan</th>
+      <th>Aksi</th>
 </tr>
+
 <tr>
     <td>1</td>
-    <td>123</td>
-    <td>Minyak</td>
-    <td>Baik digunakan</td>
-    <td>Bimoli</td>
-    <td>30</td>
-    <td>12</td>
-    <td>12 oktober 2023</td>
-    <td>50</td>
-    <td>12.000</td>
-    <td>Megaria</td>
-    <td>Ester</td>
+    <td>245</td>
+    <td>Bedak</td>
+    <td>lembut untuk kulit bayi</td>
+    <td>My Baby</td>
+    <td>5</td>
+    <td>buah</td>
+    <td>24 Nov 2022</td>
+    <td>8</td>
+    <td>10.000</td>
+    <td>imesye</td>
+    <td>ester</td>
+    <td> 
+        <a href= "#" class="btn btn-warning"> Edit </a>
+        <a href= "#" class="btn btn-danger"> Hapus </a>
 </table>
 </div>
 </div>
