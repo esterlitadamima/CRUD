@@ -10,28 +10,25 @@
     //jika tombol simpan diklik
     if(isset($_POST['bsimpan']))
     {
-        //pengujian dat edit atau disimpan baru
+        //pengujian data edit atau disimpan baru
         if($_GET['hal'] == "edit")
         {
-            //data akan diedit
-        }else
-        {
             //data akan diedit 
-            $edit =mysqli_query($koneksi, " UPDATE tb_produk set 
-                                            no = '$_POST[no]',
-                                            kode_brg = '$_POST[kode_brg]',
-                                            nama_brg = '$_POST[nama_brg]',
-                                            deskripsi_brg = '$_POST[deskripsi_brg]',
-                                            merek = '$_POST[merek]',
-                                            stok ='$_POST[stok]',
-                                            satuam_brg = '$_POST[satuan_brg]',
-                                            tanggal_kadaluarsa = '$_POST[tanggal_kadaluarsa]',
-                                            jumlah_tersedia_brg = '$_POST[jumlah_tersedia_brg]',
-                                            harga = '$_POST[harga]',
-                                            supplier = '$_POST[supplier]',
-                                            karyawan = '$_POST[karyawan]',
-                                            WHERE no = '$_GET[no]'
+            $edit = mysqli_query($koneksi, "UPDATE tb_produk set 
+                                            kode_brg = '$_POST[tkode]',
+                                            nama_brg = '$_POST[tnama]',
+                                            deskripsi_brg = '$_POST[tdeskripsi]',
+                                            merek = '$_POST[tmerek]',
+                                            stok ='$_POST[tstok]',
+                                            satuan_produk = '$_POST[tsatuan]',
+                                            tgl_kadaluarsa = '$_POST[ttanggal]',
+                                            jlh_tersedia_brg = '$_POST[tjumlah]',
+                                            harga = '$_POST[tharga]',
+                                            supplier = '$_POST[tsupplier]',
+                                            karyawan = '$_POST[tkaryawan]'
+                                            WHERE id_no = '$_GET[id]'
                                         ");
+                                            
         if($edit) //jika edit sukses
         {
             echo "<script>
@@ -47,74 +44,79 @@
                 </script>";
         }
         }
-        $simmpan =mysqli_query($koneksi, "INSERT INTO tb_produk (kode_brg, nama_brg, deskripsi_brg, merek, stok, satuan_brg, tgl_kadaluarsa, jlh_tersedia_brg, harga, supplier, karyawan)
-                                        VALUES ('$_POST[tno]',
-                                               '$_POST[tkode]',
-                                               '$_POST[tnama]',
-                                               '$_POST[tdeskripsi]',
-                                               '$_POST[tmerek]',
-                                               '$_POST[tstok]',
-                                               '$_POST[tsatuan]',
-                                               '$_POST[ttanggal]',
-                                               '$_POST[tjumlah]',
-                                               '$_POST[tharga]',
-                                               '$_POST[tsupplier]',
-                                               '$_POST[tkaryawan]')
-                                        ");
-        if($simpan) //jika simpan sukses
-        {
-            echo "<script>
-                alert('simpan data sukses');
-                document.location= 'index.php';
-                </script>";
-        }
         else
         {
-            echo "<script>
-                alert('simpan data gagal');
-                document.location= 'index.php';
-                </script>";
+            //data akan disimpan
+            $simpan = mysqli_query($koneksi, "INSERT INTO tb_produk (kode_brg, nama_brg, deskripsi_brg,merek, stok, satuan_produk, tgl_kadaluarsa, jlh_tersedia_brg, harga, supplier, karyawan)
+                                                VALUES ('$_POST[tkode]',
+                                                        '$_POST[tnama]',
+                                                        '$_POST[tdeskripsi]',
+                                                        '$_POST[tmerek]',
+                                                        '$_POST[tstok]',
+                                                        '$_POST[tsatuan]',
+                                                        '$_POST[ttanggal]',
+                                                        '$_POST[tjumlah]',
+                                                        '$_POST[tharga]',
+                                                        '$_POST[tsupplier]',
+                                                        '$_POST[tkaryawan]')
+                                                ");
+                                                        
+            if($simpan) // jika simpan sukses 
+            {
+                echo  "<script>
+                        alert('Simpan data Sukses);
+                        document.location= 'index.php';
+                        </script>";
+            }
+            else
+            {
+                echo  "<script>
+                        alert('Simpan data GAGAL);
+                        document.location= 'index.php';
+                        </script>";
+            }
         }
     }
 
-        //pengujian jika tombol edit atau hapus diklik
-        if(isset($_GET['hal']))
+    //pengujian jika tombol edit atau hapus diklik 
+    if(isset($_GET['hal']))
+    {
+        //pengujian jika data diedit 
+        if($_GET['hal'] == "edit")
         {
-            //pengujian edit data
-            if($_GET['hal'] == "edit")
+            //tampilkan data yang akan diedit 
+            $tampil = mysqli_query($koneksi, "SELECT * FROM tb_produk WHERE id_no = '$_GET[id]' ");
+            $data = mysqli_fetch_array($tampil);
+            if($data)
             {
-                //tampilkan data edit
-                $tampil = mysqli_query($koneksi, "SELECT * FROM tb_produk WHERE no ='$_GET[id]' ");
-                $data = mysqli_fetch_array($tampil);
-                if($data)
-                {
-                    //jika data didapat, ditampung dalam variabel
-                    $vno = $data['no'];
-                    $vkode_brg = $data['kode'];
-                    $vnama_brg = $data['nama'];
-                    $vdeskripsi_brg = $data['deskripsi'];
-                    $vmerek = $data['merek'];
-                    $vstok = $data['stok'];
-                    $vsatuan_brg = $data['satuan'];
-                    $vtanggal_kadaluarsa = $data['tanggal'];
-                    $vjumlah_tersedia_brg= $data['jumlah'];
-                    $vharga = $data['harga'];
-                    $vsupplier = $data['supplier'];
-                    $vkaryawan = $data['karyawan'];
-                }
-            }
-            else if ($_GET['hal'] == "hapus")
-            {
-                //menghapus data
-                $hapus = mysqli_query($koneksi, "DELETE FROM tb_produk WHERE no = '$_GET[id]' ");
-                if($hapus){
-                    echo "<script>
-                            alert('hapus data sukses');
-                             document.location= 'index.php';
-                               </script>";
-                }
+                //jika data ditemukan, maka ditampung dulu dalam variabel
+                $vkode_brg =$data['kode_brg'];
+                $vnama_brg =$data['nama_brg'];
+                $vdeskripsi_brg =$data['deskripsi_brg'];
+                $vmerek =$data['merek'];
+                $vstok =$data['stok'];
+                $vsatuan_produk =$data['satuan_produk'];
+                $vtanggal_kadaluarsa =$data['tgl_kadaluarsa'];
+                $vjumlah_tersedia_brg =$data['jlh_tersedia_brg'];
+                $vharga =$data['harga'];
+                $vsupplier =$data['supplier'];
+                $vkaryawan =$data['karyawan'];
             }
         }
+               
+        else if ($_GET['hal'] == "hapus")
+        {
+            //persiapan hapus data 
+            $hapus = mysqli_query($koneksi, "DELETE FROM tb_produk WHERE id_no = '$_GET[id]' " );
+            if($hapus){
+                echo  "<script>
+                        alert('Hapus Data Sukses');
+                        document.location= 'index.php';
+                        </script>";
+            }
+        }
+    }
+        
 ?>
 
 <!DOCTYPE html>
@@ -137,10 +139,6 @@
 <div class="card-body">
     <form method="post" action="">
         <div class="form-group">
-            <label>No</label>
-            <input type="text" name="tno" value="<?=@$vno?>" class="form-control" placeholder="masukkan no" required>
-        </div>
-        <div class="form-group">
             <label>Kode barang</label>
             <input type="text" name="tkode" value="<?=@$vkode_brg?>" class="form-control" placeholder="masukkan kode barang" required>
         </div>
@@ -162,7 +160,7 @@
         </div>
         <div class="form-group">
             <label>Satuan barang</label>
-            <input type="text" name="tsatuan" value="<?=@$vsatuan_brg?>" class="form-control" placeholder="masukkan satuan barang" required>
+            <input type="text" name="tsatuan" value="<?=@$vsatuan_produk?>" class="form-control" placeholder="masukkan satuan barang" required>
         </div>
         <div class="form-group">
             <label>Tanggal Kadaluarsa</label>
@@ -216,7 +214,7 @@
 </tr>
 <?php
     $no = 1;
-    $tampil = mysqli_query($koneksi, "SELECT * FROM tb_produk order by no desc");
+    $tampil = mysqli_query($koneksi, "SELECT * FROM tb_produk order by id_no desc");
     while($data = mysqli_fetch_array($tampil)) :
 ?>
 <tr>
@@ -226,16 +224,16 @@
     <td><?=$data ['deskripsi_brg']?></td>
     <td><?=$data ['merek']?></td>
     <td><?=$data ['stok']?></td>
-    <td><?=$data ['satuan_brg']?></td>
+    <td><?=$data ['satuan_produk']?></td>
     <td><?=$data ['tgl_kadaluarsa']?></td>
     <td><?=$data ['jlh_tersedia_brg']?></td>
     <td><?=$data ['harga']?></td>
     <td><?=$data ['supplier']?></td>
     <td><?=$data ['karyawan']?></td>
     <td>
-        <a href = "index.php?hal=edit&id=<?=$data['no']?>" class="btn btn-warning"> edit </a>
-        <a href = "index.php?hal=hapus&id=<?=$data['no']?>" 
-        onclick="retrun confirm('apakah yakin ingin menghapus data ini?')" class="btn btn-danger"> hapus </a>
+        <a href ="index.php?hal=edit&id=<?=$data['id_no']?>" class="btn btn-warning"> Edit </a>
+        <a href ="index.php?hal=hapus&id=<?=$data['id_no']?>" 
+        onclick="return confirm('apakah yakin ingin menghapus data ini?')" class="btn btn-danger"> Hapus </a>
     </tr>
     <?php endwhile; //penutup pengulangan while  ?>
 </table>
